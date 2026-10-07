@@ -122,7 +122,7 @@ function DataToContent(activeBab) {
         const sectionId = getSectionId(item, index, items);
         const wrapper = document.createElement("div");
         wrapper.id = sectionId;
-        wrapper.className = "mb-8 " + item.title.split(" ").join("_");
+        wrapper.className = "mb-8 scroll-mt-6 sm:scroll-mt-8 " + item.title.split(" ").join("_");
         wrapper.setAttribute("data-aos", "fade-up");
         wrapper.setAttribute("data-aos-duration", "500");
 
@@ -177,39 +177,68 @@ function DataToContent(activeBab) {
 }
 
 function LoadScroll(activeBab) {
-    const sidebar = document.getElementById("sidebar-nav") || document.querySelector("aside div");
-    if (!sidebar) return;
+    const desktopSidebar = document.getElementById("sidebar-nav");
+    const mobileSidebar = document.getElementById("mobile-sidebar-nav");
+    if (!desktopSidebar && !mobileSidebar) return;
 
-    sidebar.innerHTML = "";
+    if (desktopSidebar) desktopSidebar.innerHTML = "";
+    if (mobileSidebar) mobileSidebar.innerHTML = "";
+    
     const items = content[activeBab] || [];
 
-    const inactiveClass = "text-bm text-neutral-400 hover:text-primary-main transition-all leading-snug block";
-    const activeClass = "text-bm text-neutral-active font-semibold hover:text-primary-main transition-all leading-snug pl-2  block";
+    const desktopInactiveClass = "text-bm text-neutral-400 hover:text-primary-main transition-all leading-snug block";
+    const desktopActiveClass = "text-bm text-neutral-active font-semibold hover:text-primary-main transition-all leading-snug pl-2  block";
+    const mobileInactiveClass = "text-bm text-neutral-600 hover:text-primary-main transition-all leading-snug block py-1.5 px-2 rounded-md hover:bg-neutral-200/60";
+    const mobileActiveClass = "text-bm text-primary-main font-semibold leading-snug block py-1.5 px-2 rounded-md bg-primary-100/40 border-l-2 border-primary-main";
 
     items.forEach((item, index) => {
         if (!item.title) return;
             
         const sectionId = getSectionId(item, index, items);
-        const link = document.createElement("a");
-        link.href = `#${sectionId}`;
-        link.textContent = item.title;
-        link.dataset.targetId = sectionId;
-        link.className = index === 0 ? activeClass : inactiveClass;
 
-        link.addEventListener("click", (e) => {
-            e.preventDefault();
-            const targetEl = document.getElementById(sectionId);
-            if (targetEl) {
-                targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
-            }
-        });
+        // Desktop sidebar link
+        if (desktopSidebar) {
+            const deskLink = document.createElement("a");
+            deskLink.href = `#${sectionId}`;
+            deskLink.textContent = item.title;
+            deskLink.dataset.targetId = sectionId;
+            deskLink.className = index === 0 ? desktopActiveClass : desktopInactiveClass;
 
-        sidebar.appendChild(link);
+            deskLink.addEventListener("click", (e) => {
+                e.preventDefault();
+                const targetEl = document.getElementById(sectionId);
+                if (targetEl) {
+                    targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+            });
+            desktopSidebar.appendChild(deskLink);
+        }
+
+        // Mobile accordion link
+        if (mobileSidebar) {
+            const mobLink = document.createElement("a");
+            mobLink.href = `#${sectionId}`;
+            mobLink.textContent = item.title;
+            mobLink.dataset.targetId = sectionId;
+            mobLink.className = index === 0 ? mobileActiveClass : mobileInactiveClass;
+
+            mobLink.addEventListener("click", (e) => {
+                e.preventDefault();
+                const targetEl = document.getElementById(sectionId);
+                if (targetEl) {
+                    targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+                const details = mobLink.closest("details");
+                if (details) {
+                    details.open = false;
+                }
+            });
+            mobileSidebar.appendChild(mobLink);
+        }
     });
 
     function onScroll() {
         const scrollPosition = window.scrollY + 180;
-        const links = sidebar.querySelectorAll("a");
         let activeId = "";
 
         items.forEach((item, index) => {
@@ -225,14 +254,28 @@ function LoadScroll(activeBab) {
             activeId = getSectionId(items[0], 0, items);
         }
 
-        links.forEach(link => {
-            if (link.dataset.targetId === activeId) {
-                link.className = activeClass;
-                link.scrollIntoView({ block: "nearest", behavior: "smooth" });
-            } else {
-                link.className = inactiveClass;
-            }
-        });
+        if (desktopSidebar) {
+            const deskLinks = desktopSidebar.querySelectorAll("a");
+            deskLinks.forEach(link => {
+                if (link.dataset.targetId === activeId) {
+                    link.className = desktopActiveClass;
+                    link.scrollIntoView({ block: "nearest", behavior: "smooth" });
+                } else {
+                    link.className = desktopInactiveClass;
+                }
+            });
+        }
+
+        if (mobileSidebar) {
+            const mobLinks = mobileSidebar.querySelectorAll("a");
+            mobLinks.forEach(link => {
+                if (link.dataset.targetId === activeId) {
+                    link.className = mobileActiveClass;
+                } else {
+                    link.className = mobileInactiveClass;
+                }
+            });
+        }
     }
 
     window.addEventListener("scroll", onScroll, { passive: true });

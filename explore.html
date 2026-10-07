@@ -104,7 +104,7 @@
   <body class="bg-[#F9F9F9] text-neutral-main min-h-screen antialiased">
     <!-- fixed sidebar -->
     <aside
-      class="hidden xl:flex fixed left-0 top-0 bottom-0 w-50 flex-col justify-center pl-12 gap-3 z-10"
+      class="hidden xl:flex fixed left-0 top-0 bottom-0 w-56 flex-col justify-center pl-8 2xl:pl-12 gap-3 z-10"
     >
       <div
         id="sidebar-nav"
@@ -114,13 +114,13 @@
 
     <!-- content -->
     <div
-      class="flex flex-col min-h-screen sm:px-12 md:px-16 lg:px-32 xl:px-52 2xl:px-80"
+      class="flex flex-col min-h-screen w-full px-4 sm:px-8 md:px-12 xl:pl-64 xl:pr-12 2xl:pl-72 2xl:pr-16 max-w-7xl mx-auto"
     >
       <!-- header or navigation -->
       <header
         data-aos="fade-down"
         data-aos-duration="600"
-        class="flex items-center justify-center gap-3 text-bl text-neutral-main font-normal pt-10 pb-6 px-4"
+        class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-bm sm:text-bl text-neutral-main font-normal pt-6 sm:pt-10 pb-6 px-4"
       >
         <a href="index.html" class="hover:text-primary-main transition-colors">Home</a>
         <span class="text-neutral-400 font-bold">·</span>
@@ -130,33 +130,47 @@
         <span class="text-neutral-400 font-bold">·</span>
         <a
           href="https://drive.google.com/file/d/1NmCyK2vrCBmeTP4eSqoUYLwTrRqtTY0I/view?usp=sharing"
-          class="inline-flex items-center gap-2 bg-primary-main hover:bg-primary-hover active:bg-primary-active text-white px-4 py-2 rounded-lg text-bl font-medium transition-colors shadow-sm"
+          class="inline-flex items-center gap-1.5 sm:gap-2 bg-primary-main hover:bg-primary-hover active:bg-primary-active text-white px-3 sm:px-4 py-2 rounded-lg text-bm sm:text-bl font-medium transition-colors shadow-sm"
         >
-          <i data-lucide="download" class="w-4 h-4"></i>
+          <i data-lucide="download" class="w-4 h-4 shrink-0"></i>
           <span>Download PPT</span>
         </a>
       </header>
 
       <!-- main content -->
-      <main class="px-6 pb-16">
+      <main class="w-full pb-16">
         <!-- title -->
-        <div data-aos="fade-up" class="text-center mb-8 pb-8 border-b border-neutral-200 py-10">
+        <div data-aos="fade-up" class="text-center mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-neutral-200 py-6 sm:py-10">
           <h1
-            class="text-h2 font-bold text-primary-main leading-snug max-w-2xl mx-auto"
+            class="text-h3 sm:text-h2 font-bold text-primary-main leading-snug max-w-2xl mx-auto break-words"
           >
             Mathematics Behind Physics-Informed Neural Networks (PINNs)
           </h1>
         </div>
 
         <!-- article -->
-        <article class="max-w-3xl">
+        <article class="max-w-3xl mx-auto w-full">
+          <!-- mobile / tablet table of contents -->
+          <div class="xl:hidden mb-6 bg-neutral-100/90 border border-neutral-200 rounded-xl p-3 sm:p-4">
+            <details class="group">
+              <summary class="flex items-center justify-between cursor-pointer font-medium text-bm text-neutral-700 select-none">
+                <span class="flex items-center gap-2">
+                  <i data-lucide="list" class="w-4 h-4 text-primary-main"></i>
+                  <span>Table of Contents</span>
+                </span>
+                <i data-lucide="chevron-down" class="w-4 h-4 text-neutral-400 transition-transform duration-200 group-open:rotate-180"></i>
+              </summary>
+              <div id="mobile-sidebar-nav" class="mt-3 pt-3 border-t border-neutral-200 space-y-2 max-h-60 overflow-y-auto card-scrollbar"></div>
+            </details>
+          </div>
+
           <!-- subtitle -->
           <h2 id="article-subtitle" data-aos="fade-up" class="text-h4 font-bold text-neutral-active mb-4">
             Feedforward Neural Networks
           </h2>
 
           <!-- author -->
-          <div data-aos="fade-up" data-aos-delay="100" class="flex items-center justify-between mb-6">
+          <div data-aos="fade-up" data-aos-delay="100" class="flex flex-wrap items-center justify-between gap-3 mb-6">
             <div class="flex items-center gap-3">
               <img
                 src="image/pak-luthfi.jpg"
@@ -170,12 +184,12 @@
                   Muhammad Luthfi Shahab
                 </p>
                 <p class="text-bs text-neutral-500 leading-tight">
-                  Lecture of Mathematics ITS
+                  Lecturer of Mathematics ITS
                 </p>
               </div>
             </div>
-            <p id="article-meta" class="text-bm text-neutral-500">
-              4 Mins Read · 24 September 2026
+            <p id="article-meta" class="text-bm text-neutral-500 shrink-0">
+              24 September 2026
             </p>
           </div>
 
@@ -202,45 +216,45 @@
               id="download-code-btn"
               href="#"
               target="_blank"
-              class="inline-flex items-center gap-2 bg-primary-main hover:bg-primary-hover active:bg-primary-active text-white px-4 py-2 rounded-lg text-bl font-medium transition-colors shadow-sm"
+              class="inline-flex items-center justify-center max-w-full gap-2 bg-primary-main hover:bg-primary-hover active:bg-primary-active text-white px-4 py-2.5 rounded-lg text-bm sm:text-bl font-medium transition-colors shadow-sm text-center"
             >
-              <i data-lucide="download" class="w-4 h-4"></i>
-              <span>Download Source Code (main.m)</span>
+              <i data-lucide="download" class="w-4 h-4 shrink-0"></i>
+              <span class="truncate">Download Source Code (main.m)</span>
             </a>
           </div>
 
           <!-- previous or next -->
-          <div id="prev-next-nav" data-aos="fade-up" class="flex items-center justify-between mb-12">
+          <div id="prev-next-nav" data-aos="fade-up" class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-12">
             <a
               id="prev-btn"
               href="#"
-              class="inline-flex items-center gap-1.5 bg-neutral-200 hover:bg-neutral-300 text-neutral-active text-bl font-medium px-4 py-2 rounded-lg transition-colors shadow-sm cursor-pointer"
+              class="inline-flex items-center justify-center sm:justify-start gap-2 bg-neutral-200 hover:bg-neutral-300 text-neutral-active text-bl font-medium px-4 py-2.5 rounded-lg transition-colors shadow-sm cursor-pointer"
             >
-              <i data-lucide="arrow-left" class="w-4 h-4"></i>
-              <span id="prev-btn-text">Previous</span>
+              <i data-lucide="arrow-left" class="w-4 h-4 shrink-0"></i>
+              <span id="prev-btn-text" class="truncate max-w-[200px] sm:max-w-[220px] md:max-w-[280px]">Previous</span>
             </a>
             <a
               id="next-btn"
               href="#"
-              class="inline-flex items-center gap-1.5 bg-neutral-200 hover:bg-neutral-300 text-neutral-active text-bl font-medium px-4 py-2 rounded-lg transition-colors shadow-sm cursor-pointer"
+              class="inline-flex items-center justify-center sm:justify-end gap-2 bg-neutral-200 hover:bg-neutral-300 text-neutral-active text-bl font-medium px-4 py-2.5 rounded-lg transition-colors shadow-sm cursor-pointer ml-auto sm:ml-0"
             >
-              <span id="next-btn-text">Next</span>
-              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              <span id="next-btn-text" class="truncate max-w-[200px] sm:max-w-[220px] md:max-w-[280px]">Next</span>
+              <i data-lucide="arrow-right" class="w-4 h-4 shrink-0"></i>
             </a>
           </div>
 
           <!-- see others -->
           <div data-aos="fade-up">
-            <h2 class="text-t font-medium text-neutral-main mb-5">
+            <h2 class="text-t sm:text-h5 font-medium text-neutral-main mb-4 sm:mb-5">
               See others
             </h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
               <!-- Card 1 -->
               <a
                 href="explore.html?chapter=Feedforward-Neural-Networks"
                 data-aos="fade-up"
                 data-aos-delay="100"
-                class="group relative aspect-3/4 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col justify-end p-4 pb-6"
+                class="group relative aspect-3/4 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col justify-end p-3.5 sm:p-4 pb-5 sm:pb-6"
               >
                 <img
                   src="image/bab_1.png"
@@ -260,7 +274,7 @@
                 href="explore.html?chapter=Differential-Equations"
                 data-aos="fade-up"
                 data-aos-delay="200"
-                class="group relative aspect-3/4 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col justify-end p-4 pb-6"
+                class="group relative aspect-3/4 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col justify-end p-3.5 sm:p-4 pb-5 sm:pb-6"
               >
                 <img
                   src="image/bab_2.png"
@@ -280,7 +294,7 @@
                 href="explore.html?chapter=forward-problem"
                 data-aos="fade-up"
                 data-aos-delay="300"
-                class="group relative aspect-3/4 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col justify-end p-4 pb-6"
+                class="group relative aspect-3/4 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col justify-end p-3.5 sm:p-4 pb-5 sm:pb-6"
               >
                 <img
                   src="image/bab_3.png"
@@ -300,7 +314,7 @@
                 href="explore.html?chapter=inverse-problem"
                 data-aos="fade-up"
                 data-aos-delay="400"
-                class="group relative aspect-3/4 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col justify-end p-4 pb-6"
+                class="group relative aspect-3/4 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col justify-end p-3.5 sm:p-4 pb-5 sm:pb-6"
               >
                 <img
                   src="image/bab_4.jpg"

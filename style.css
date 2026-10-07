@@ -6,12 +6,27 @@
   scroll-behavior: smooth;
 }
 
-/* MathJax Display Math Centering */
+/* MathJax Responsive Display & Mobile Scrolling */
+mjx-container {
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  -webkit-overflow-scrolling: touch;
+}
+
 mjx-container[jax="CHTML"][display="true"] {
-  display: flex !important;
-  justify-content: center !important;
+  display: block !important;
   text-align: center !important;
   margin: 1.25rem 0 !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  padding: 0.25rem 0 !important;
+}
+
+.content-writing {
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .font-bold {
