@@ -1,0 +1,124 @@
+* {
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  scroll-behavior: smooth;
+}
+
+/* MathJax Display Math Centering */
+mjx-container[jax="CHTML"][display="true"] {
+  display: flex !important;
+  justify-content: center !important;
+  text-align: center !important;
+  margin: 1.25rem 0 !important;
+}
+
+.font-bold {
+  font-weight: 600;
+}
+
+.font-semibold {
+  font-weight: 500;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.card-scrollbar::-webkit-scrollbar {
+  width: 12px;
+}
+
+.card-scrollbar::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.card-scrollbar::-webkit-scrollbar-thumb {
+  background: #c2c2c2;
+  border-radius: 20px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+/* Typography Variants */
+.text-h1 {
+  font-size: 32px;
+  line-height: 40px;
+}
+.text-h2 {
+  font-size: 28px;
+  line-height: 36px;
+}
+.text-h3 {
+  font-size: 24px;
+  line-height: 32px;
+}
+.text-h4 {
+  font-size: 20px;
+  line-height: 28px;
+}
+.text-h5 {
+  font-size: 18px;
+  line-height: 26px;
+}
+.text-t {
+  font-size: 16px;
+  line-height: 24px;
+}
+.text-bl {
+  font-size: 14px;
+  line-height: 22px;
+}
+.text-bm {
+  font-size: 12px;
+  line-height: 18px;
+}
+.text-bs {
+  font-size: 11px;
+  line-height: 16px;
+}
+.text-bt {
+  font-size: 10px;
+  line-height: 14px;
+}
+
+@media (min-width: 768px) {
+  .text-h1 {
+    font-size: 48px;
+    line-height: 56px;
+  }
+  .text-h2 {
+    font-size: 40px;
+    line-height: 48px;
+  }
+  .text-h3 {
+    font-size: 32px;
+    line-height: 40px;
+  }
+  .text-h4 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .text-h5 {
+    font-size: 20px;
+    line-height: 28px;
+  }
+  .text-t {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .text-bl {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .text-bm {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .text-bs {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}

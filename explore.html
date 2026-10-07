@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Mathematics Behind Physics-Informed Neural Networks (PINNs)" />
+    <meta
+      name="description"
+      content="Comprehensive lecture notes and interactive materials on Physics-Informed Neural Networks (PINNs), Feedforward Neural Networks, Differential Equations, and Forward & Inverse Problems by Muhammad Luthfi Shahab (ILMS 2026)."
+    />
+    <meta name="author" content="Muhammad Luthfi Shahab" />
+
+    <!-- Favicon / Logo -->
+    <link rel="icon" type="image/x-icon" href="image/logo-pin.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="image/logo-pin.ico" />
+
+
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [
+            ["$", "$"],
+            ["\\(", "\\)"],
+          ],
+          displayMath: [
+            ["$$", "$$"],
+            ["\\[", "\\]"],
+          ],
+        },
+        chtml: {
+          displayAlign: "center",
+        },
+      };
+    </script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+
+    <style type="text/tailwindcss">
+      @theme {
+        --color-primary-main: #0147bb;
+        --color-primary-hover: #013ba0;
+        --color-primary-active: #012f82;
+        --color-primary-surface: #edf4fe;
+        --color-primary-border: #b6d3fd;
+        --color-primary-focus: #2563eb;
+        --color-secondary-main: #475569;
+        --color-secondary-hover: #334155;
+        --color-secondary-active: #1e293b;
+        --color-secondary-surface: #f8fafc;
+        --color-secondary-border: #cbd5e1;
+        --color-secondary-focus: #64748b;
+        --color-success-main: #16a34a;
+        --color-success-hover: #15803d;
+        --color-success-active: #166534;
+        --color-success-surface: #f0fdf4;
+        --color-success-border: #bbf7d0;
+        --color-success-focus: #22c55e;
+        --color-warning-main: #d97706;
+        --color-warning-hover: #b45309;
+        --color-warning-active: #92400e;
+        --color-warning-surface: #fffbeb;
+        --color-warning-border: #fde68a;
+        --color-warning-focus: #f59e0b;
+        --color-error-main: #dc2626;
+        --color-error-hover: #b91c1c;
+        --color-error-active: #991b1b;
+        --color-error-surface: #fef2f2;
+        --color-error-border: #fecaca;
+        --color-error-focus: #ef4444;
+        --color-info-main: #0284c7;
+        --color-info-hover: #0369a1;
+        --color-info-active: #075985;
+        --color-info-surface: #f0f9ff;
+        --color-info-border: #bae6fd;
+        --color-info-focus: #38bdf8;
+        --color-neutral-main: #525252;
+        --color-neutral-hover: #363636;
+        --color-neutral-active: #1a1a1a;
+        --color-neutral-surface: #f9f9f9;
+        --color-neutral-border: #dddddd;
+        --color-neutral-focus: #8a8a8a;
+      }
+    </style>
+
+    <title>Feedforward Neural Networks — Mathematics Behind PINN</title>
+  </head>
+
+  <body class="bg-[#F9F9F9] text-neutral-main min-h-screen antialiased">
+    <!-- fixed sidebar -->
+    <aside
+      class="hidden xl:flex fixed left-0 top-0 bottom-0 w-50 flex-col justify-center pl-12 gap-3 z-10"
+    >
+      <div
+        id="sidebar-nav"
+        class="space-y-4 xl:flex flex-col max-h-[65vh] overflow-y-auto pr-2 card-scrollbar"
+      ></div>
+    </aside>
+
+    <!-- content -->
+    <div
+      class="flex flex-col min-h-screen sm:px-12 md:px-16 lg:px-32 xl:px-52 2xl:px-80"
+    >
+      <!-- header or navigation -->
+      <header
+        data-aos="fade-down"
+        data-aos-duration="600"
+        class="flex items-center justify-center gap-3 text-bl text-neutral-main font-normal pt-10 pb-6 px-4"
+      >
+        <a href="index.html" class="hover:text-primary-main transition-colors">Home</a>
+        <span class="text-neutral-400 font-bold">·</span>
+        <a href="index.html#materials" class="hover:text-primary-main transition-colors"
+          >All Materials</a
+        >
+        <span class="text-neutral-400 font-bold">·</span>
+        <a
+          href="https://drive.google.com/file/d/1NmCyK2vrCBmeTP4eSqoUYLwTrRqtTY0I/view?usp=sharing"
+          class="inline-flex items-center gap-2 bg-primary-main hover:bg-primary-hover active:bg-primary-active text-white px-4 py-2 rounded-lg text-bl font-medium transition-colors shadow-sm"
+        >
+          <i data-lucide="download" class="w-4 h-4"></i>
+          <span>Download PPT</span>
+        </a>
+      </header>
+
+      <!-- main content -->
+      <main class="px-6 pb-16">
+        <!-- title -->
+        <div data-aos="fade-up" class="text-center mb-8 pb-8 border-b border-neutral-200 py-10">
+          <h1
+            class="text-h2 font-bold text-primary-main leading-snug max-w-2xl mx-auto"
+          >
+            Mathematics Behind Physics-Informed Neural Networks (PINNs)
+          </h1>
+        </div>
+
+        <!-- article -->
+        <article class="max-w-3xl">
+          <!-- subtitle -->
+          <h2 id="article-subtitle" data-aos="fade-up" class="text-h4 font-bold text-neutral-active mb-4">
+            Feedforward Neural Networks
+          </h2>
+
+          <!-- author -->
+          <div data-aos="fade-up" data-aos-delay="100" class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-3">
+              <img
+                src="image/pak-luthfi.jpg"
+                alt="Muhammad Luthfi Shahab"
+                class="w-9 h-9 rounded-full object-cover shrink-0 shadow-xs"
+              />
+              <div>
+                <p
+                  class="text-bm font-semibold text-neutral-active leading-tight"
+                >
+                  Muhammad Luthfi Shahab
+                </p>
+                <p class="text-bs text-neutral-500 leading-tight">
+                  Lecture of Mathematics ITS
+                </p>
+              </div>
+            </div>
+            <p id="article-meta" class="text-bm text-neutral-500">
+              4 Mins Read · 24 September 2026
+            </p>
+          </div>
+
+          <!-- image -->
+          <div
+            id="article-cover"
+            data-aos="fade-up"
+            data-aos-delay="150"
+            class="w-full aspect-video bg-neutral-200 rounded-2xl mb-8 overflow-hidden shadow-sm"
+          >
+            <img
+              id="article-cover-img"
+              src="image/bab_1.png"
+              alt="Cover Image"
+              class="w-full h-full object-cover rounded-2xl"
+            />
+          </div>
+
+          <!-- content -->
+          <div id="content-container"></div>
+
+          <div data-aos="fade-up" class="pb-8 text-center">
+            <a
+              id="download-code-btn"
+              href="#"
+              target="_blank"
+              class="inline-flex items-center gap-2 bg-primary-main hover:bg-primary-hover active:bg-primary-active text-white px-4 py-2 rounded-lg text-bl font-medium transition-colors shadow-sm"
+            >
+              <i data-lucide="download" class="w-4 h-4"></i>
+              <span>Download Source Code (main.m)</span>
+            </a>
+          </div>
+
+          <!-- previous or next -->
+          <div id="prev-next-nav" data-aos="fade-up" class="flex items-center justify-between mb-12">
+            <a
+              id="prev-btn"
+              href="#"
+              class="inline-flex items-center gap-1.5 bg-neutral-200 hover:bg-neutral-300 text-neutral-active text-bl font-medium px-4 py-2 rounded-lg transition-colors shadow-sm cursor-pointer"
+            >
+              <i data-lucide="arrow-left" class="w-4 h-4"></i>
+              <span id="prev-btn-text">Previous</span>
+            </a>
+            <a
+              id="next-btn"
+              href="#"
+              class="inline-flex items-center gap-1.5 bg-neutral-200 hover:bg-neutral-300 text-neutral-active text-bl font-medium px-4 py-2 rounded-lg transition-colors shadow-sm cursor-pointer"
+            >
+              <span id="next-btn-text">Next</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+          </div>
+
+          <!-- see others -->
+          <div data-aos="fade-up">
+            <h2 class="text-t font-medium text-neutral-main mb-5">
+              See others
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <!-- Card 1 -->
+              <a
+                href="explore.html?chapter=Feedforward-Neural-Networks"
+                data-aos="fade-up"
+                data-aos-delay="100"
+                class="group relative aspect-3/4 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col justify-end p-4 pb-6"
+              >
+                <img
+                  src="image/bab_1.png"
+                  alt="Feedforward Neural Networks"
+                  class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                <p
+                  class="relative z-10 text-bm font-medium text-white leading-snug drop-shadow-sm"
+                >
+                  Feedforward Neural Networks
+                </p>
+              </a>
+
+              <!-- Card 2 -->
+              <a
+                href="explore.html?chapter=Differential-Equations"
+                data-aos="fade-up"
+                data-aos-delay="200"
+                class="group relative aspect-3/4 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col justify-end p-4 pb-6"
+              >
+                <img
+                  src="image/bab_2.png"
+                  alt="Differential Equations"
+                  class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                <p
+                  class="relative z-10 text-bm font-medium text-white leading-snug drop-shadow-sm"
+                >
+                  Differential Equations
+                </p>
+              </a>
+
+              <!-- Card 3 -->
+              <a
+                href="explore.html?chapter=forward-problem"
+                data-aos="fade-up"
+                data-aos-delay="300"
+                class="group relative aspect-3/4 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col justify-end p-4 pb-6"
+              >
+                <img
+                  src="image/bab_3.png"
+                  alt="PINNs (Forward Problem)"
+                  class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                <p
+                  class="relative z-10 text-bm font-medium text-white leading-snug drop-shadow-sm"
+                >
+                  PINNs (Forward Problem)
+                </p>
+              </a>
+
+              <!-- Card 4 -->
+              <a
+                href="explore.html?chapter=inverse-problem"
+                data-aos="fade-up"
+                data-aos-delay="400"
+                class="group relative aspect-3/4 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer flex flex-col justify-end p-4 pb-6"
+              >
+                <img
+                  src="image/bab_4.jpg"
+                  alt="PINNs (Inverse Problem)"
+                  class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                <p
+                  class="relative z-10 text-bm font-medium text-white leading-snug drop-shadow-sm"
+                >
+                  PINNs (Inverse Problem)
+                </p>
+              </a>
+            </div>
+          </div>
+        </article>
+      </main>
+
+      <!-- Footer -->
+      <footer
+        data-aos="fade-up"
+        class="text-center py-10 px-4 text-bm text-neutral-main font-normal"
+      >
+        <p>
+          Pemrograman Aplikasi Website (2026/2027)
+          <span class="mx-1.5 text-neutral-400">·</span>
+          <a href="https://github.com/AddienZakia/pweb-ppt" class="text-primary-main font-semibold"
+            >Addien Zakia Hidayat</a
+          >
+        </p>
+      </footer>
+    </div>
+
+    <!-- Initialize Lucide Icons -->
+    <script type="module" src="script/content.js"></script>
+    <script type="module" src="script/script.js"></script>
+    <script>
+      lucide.createIcons();
+      AOS.init({
+        duration: 600,
+        once: true,
+        easing: 'ease-out-cubic',
+      });
+    </script>
+  </body>
+</html>
